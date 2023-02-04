@@ -9,6 +9,7 @@ const createWindow = () => {
         height: 300,
         backgroundColor: '#2f3241',
         symbolColor: '#74b1be',
+        resizable: false,
         titleBarStyle: 'hidden',
         titleBarOverlay: true,
         titleBarOverlay: {

@@ -8,6 +8,11 @@ button {
     -webkit-app-region: no-drag;
 }
 
+h4 {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+}
 .content {
     padding-left: 20.5%;
     padding-right: 20.5%;
@@ -26,6 +31,36 @@ button {
     background-color: #74b1be;
     color: white;
     border-radius: 5px;
-    font-size: 20px;
     padding: 5px;
+    width: 90%;
+    font-size: 15px;
+    height: 33px;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+#myProgress {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #74b1be;
+}
+
+#myBar {
+    width: 100%;
+    height: 33px;
+    border-radius: 5px;
+    background-color: #74b1be;
+}
+
+#progress-label {
+    position: absolute;
+    color: white;
+    padding: 1.5%;
 }
