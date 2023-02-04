@@ -1,0 +1,22 @@
+{
+  "name": "nervupdaterclient",
+  "version": "1.0.0",
+  "description": "update companion for ncos dvised",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vortex-Dynamics/NervUpdaterClient.git"
+  },
+  "author": "vortex dynamics",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vortex-Dynamics/NervUpdaterClient/issues"
+  },
+  "homepage": "https://github.com/Vortex-Dynamics/NervUpdaterClient#readme",
+  "devDependencies": {
+    "electron": "^22.2.0"
+  }
+}
