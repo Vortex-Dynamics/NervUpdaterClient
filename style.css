@@ -14,8 +14,8 @@ h4 {
     margin-bottom: 10px;
 }
 .content {
-    padding-left: 20.5%;
-    padding-right: 20.5%;
+    padding-left: 15.5%;
+    padding-right: 15.5%;
     padding-top: 5%;
 }
 
@@ -37,13 +37,113 @@ h4 {
     height: 33px;
 }
 
+.download:hover {
+    background-color: #3d5a61;
+}
+
+div[class^=col-] {
+    padding: 1rem 0
+}
+
 .row {
-    width: 100%;
     display: flex;
+    flex-wrap: wrap
+}
+
+.col-1 {
+    flex: 0 0 8.33333%
+}
+
+.col-offset-1 {
+    margin-left: 8.33333%
+}
+
+.col-2 {
+    flex: 0 0 16.66667%
+}
+
+.col-offset-2 {
+    margin-left: 16.66667%
+}
+
+.col-3 {
+    flex: 0 0 25%
+}
+
+.col-offset-3 {
+    margin-left: 25%
+}
+
+.col-4 {
+    flex: 0 0 33.33333%
+}
+
+.col-offset-4 {
+    margin-left: 33.33333%
+}
+
+.col-5 {
+    flex: 0 0 41.66667%
+}
+
+.col-offset-5 {
+    margin-left: 41.66667%
 }
 
 .col-6 {
-    width: 50%;
+    flex: 0 0 50%
+}
+
+.col-offset-6 {
+    margin-left: 50%
+}
+
+.col-7 {
+    flex: 0 0 58.33333%
+}
+
+.col-offset-7 {
+    margin-left: 58.33333%
+}
+
+.col-8 {
+    flex: 0 0 66.66667%
+}
+
+.col-offset-8 {
+    margin-left: 66.66667%
+}
+
+.col-9 {
+    flex: 0 0 75%
+}
+
+.col-offset-9 {
+    margin-left: 75%
+}
+
+.col-10 {
+    flex: 0 0 83.33333%
+}
+
+.col-offset-10 {
+    margin-left: 83.33333%
+}
+
+.col-11 {
+    flex: 0 0 91.66667%
+}
+
+.col-offset-11 {
+    margin-left: 91.66667%
+}
+
+.col-12 {
+    flex: 0 0 100%
+}
+
+.col-offset-12 {
+    margin-left: 100%
 }
 
 #myProgress {
@@ -52,7 +152,7 @@ h4 {
     border: 1px solid #74b1be;
 }
 
-#myBar {
+#progress-bar {
     width: 100%;
     height: 33px;
     border-radius: 5px;
