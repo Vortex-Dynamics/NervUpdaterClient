@@ -4,8 +4,9 @@ const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('electronAPI', {
     handleError: (callback) => ipcRenderer.on("error-message", callback),
-    updateProgress: (callback) => ipcRenderer.on('github-lookup', callback)
-})
+    updateProgress: (callback) => ipcRenderer.on('github-lookup', callback),
+    updateFound: (callback) => ipcRenderer.on('github-update', callback)
+});
 
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector, text) => {
@@ -16,4 +17,4 @@ window.addEventListener('DOMContentLoaded', () => {
     for (const dependency of ['chrome', 'node', 'electron']) {
         replaceText(`${dependency}-version`, process.versions[dependency])
     }
-})
+}); 

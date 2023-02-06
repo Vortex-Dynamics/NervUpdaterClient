@@ -1,8 +1,11 @@
 window.electronAPI.updateProgress((_event, value) => {
-    console.log(_event)
-    console.log(value)
     updateProgressStep(value);
-})
+});
+
+window.electronAPI.updateFound((_event, value) => {
+    toggleDownloadButton(true);
+    updateLatestHeader(value.tag);
+});
 
 window.electronAPI.handleError((_event, value) => {
     let error = `
@@ -20,7 +23,15 @@ window.electronAPI.handleError((_event, value) => {
     `;
 
     document.querySelector("body").innerHTML = error;
-})
+});
+
+function updateLatestHeader(version) {
+    document.getElementById("latest").innerHTML = version;
+}
+
+function updateCurrentHeader(version) {
+    document.getElementById("installed").innerHTML = version;
+}
 
 function updateProgressBar(progress){
     document.getElementById("progress-bar").style.width = progress + "%";

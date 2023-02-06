@@ -1,14 +1,9 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, webContents, ipcRenderer } = require('electron')
-const { Octokit, App } = require("octokit");
 const path = require('path')
-const {token} = require("./config/gittoken.json");
-
-// Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
-const octokit = new Octokit({auth: token});
+const {initGithub, fetchLatest} = require("./github")
 
 var mainWindow;
-
 const createWindow = () => {
     // Create the browser window.
     mainWindow = new BrowserWindow({
@@ -32,26 +27,15 @@ const createWindow = () => {
     mainWindow.loadFile('index.html')
 
     mainWindow.on("ready-to-show", async () => {
-        initGithub()
-    })
+        initGithub(mainWindow);
+        fetchLatest(mainWindow, {
+            owner: "Vortex-Dynamics",
+            repo: "NervUpdaterClient"
+        });
+    });
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
-}
-
-async function initGithub (){
-    console.log(`token: %s`, token)
-    mainWindow.webContents.send("github-lookup", "looking up releases");
-    // Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
-    const { data: { login }, } = await octokit.rest.users.getAuthenticated().catch(async err => {
-        if (err) {
-            console.log(err);
-            mainWindow.webContents.send("error-message", {label: "authentication failed", err: err})
-        }
-    });
-    console.log("Hello, %s", login);
-    mainWindow.webContents.send("github-lookup", "no releases found");
-
+    mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
