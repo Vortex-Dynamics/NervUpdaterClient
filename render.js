@@ -1,3 +1,9 @@
+window.electronAPI.updateProgress(async (_event, value) => {
+    console.log(_event)
+    console.log(value)
+    updateProgressStep(value);
+})
+
 function updateProgressBar(progress){
     document.getElementById("progress-bar").style.width = progress + "%";
     document.getElementById("progress-label").textContent = progress + "%";

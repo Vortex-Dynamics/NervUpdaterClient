@@ -1,5 +1,11 @@
 // All the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
+const { contextBridge, ipcRenderer } = require('electron')
+
+contextBridge.exposeInMainWorld('electronAPI', {
+    updateProgress: (callback) => ipcRenderer.on('github-lookup', callback)
+})
+
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector, text) => {
         const element = document.getElementById(selector)

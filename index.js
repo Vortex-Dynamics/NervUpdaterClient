@@ -1,10 +1,17 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, webContents, ipcRenderer } = require('electron')
+const { Octokit, App } = require("octokit");
 const path = require('path')
+const {token} = require("./gittoken.json");
+
+// Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
+const octokit = new Octokit({auth: token});
+
+var mainWindow;
 
 const createWindow = () => {
     // Create the browser window.
-    const mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 600,
         height: 300,
         backgroundColor: '#2f3241',
@@ -29,16 +36,28 @@ const createWindow = () => {
     // mainWindow.webContents.openDevTools()
 }
 
+async function initGithub (){
+    console.log(`token: %s`, token)
+    mainWindow.webContents.send("github-lookup", "looking up releases");
+    // Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
+    const { data: { login }, } = await octokit.rest.users.getAuthenticated();
+    console.log("Hello, %s", login);
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
     createWindow()
+    initGithub()
 
-    app.on('activate', () => {
+    app.on('activate', async () => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
-        if (BrowserWindow.getAllWindows().length === 0) createWindow()
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow();
+            initGithub();
+        }
     })
 })
 
