@@ -1,6 +1,15 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
+const { Octokit, App } = require("octokit");
 const path = require('path')
+const {githubtoken} = require("./package.json");
+
+// Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
+const octokit = new Octokit({ auth:  });
+
+// Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
+const { data: { login } } = await octokit.rest.users.getAuthenticated({auth: githubtoken});
+console.log("Hello, %s", login);
 
 const createWindow = () => {
     // Create the browser window.

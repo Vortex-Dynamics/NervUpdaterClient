@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "update companion for ncos dvised",
   "main": "index.js",
+  "githubtoken": "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",
   "scripts": {
     "start": "electron ."
   },
@@ -18,5 +19,8 @@
   "homepage": "https://github.com/Vortex-Dynamics/NervUpdaterClient#readme",
   "devDependencies": {
     "electron": "^22.2.0"
+  },
+  "dependencies": {
+    "octokit": "^2.0.14"
   }
 }
