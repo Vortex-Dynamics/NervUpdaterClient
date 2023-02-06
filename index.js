@@ -2,7 +2,7 @@
 const { app, BrowserWindow, webContents, ipcRenderer } = require('electron')
 const { Octokit, App } = require("octokit");
 const path = require('path')
-const {token} = require("./gittoken.json");
+const {token} = require("./config/gittoken.json");
 
 // Create a personal access token at https://github.com/settings/tokens/new?scopes=repo
 const octokit = new Octokit({auth: token});
@@ -31,6 +31,10 @@ const createWindow = () => {
     // and load the index.html of the app.
     mainWindow.loadFile('index.html')
 
+    mainWindow.on("ready-to-show", async () => {
+        initGithub()
+    })
+
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 }
@@ -46,6 +50,8 @@ async function initGithub (){
         }
     });
     console.log("Hello, %s", login);
+    mainWindow.webContents.send("github-lookup", "no releases found");
+
 }
 
 // This method will be called when Electron has finished
@@ -53,14 +59,12 @@ async function initGithub (){
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(async () => {
     createWindow()
-    initGithub()
 
     app.on('activate', async () => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
         if (BrowserWindow.getAllWindows().length === 0) {
             createWindow();
-            initGithub();
         }
     })
 })

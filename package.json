@@ -18,5 +18,8 @@
   "homepage": "https://github.com/Vortex-Dynamics/NervUpdaterClient#readme",
   "devDependencies": {
     "electron": "^22.2.0"
+  },
+  "dependencies": {
+    "octokit": "^2.0.14"
   }
 }
