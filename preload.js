@@ -3,6 +3,7 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld('electronAPI', {
+    handleError: (callback) => ipcRenderer.on("error-message", callback),
     updateProgress: (callback) => ipcRenderer.on('github-lookup', callback)
 })
 

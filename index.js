@@ -15,7 +15,6 @@ const createWindow = () => {
         width: 600,
         height: 300,
         backgroundColor: '#2f3241',
-        symbolColor: '#74b1be',
         resizable: false,
         titleBarStyle: 'hidden',
         titleBarOverlay: true,
@@ -40,7 +39,12 @@ async function initGithub (){
     console.log(`token: %s`, token)
     mainWindow.webContents.send("github-lookup", "looking up releases");
     // Compare: https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
-    const { data: { login }, } = await octokit.rest.users.getAuthenticated();
+    const { data: { login }, } = await octokit.rest.users.getAuthenticated().catch(async err => {
+        if (err) {
+            console.log(err);
+            mainWindow.webContents.send("error-message", {label: "authentication failed", err: err})
+        }
+    });
     console.log("Hello, %s", login);
 }
 
